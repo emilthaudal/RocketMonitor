@@ -1,5 +1,3 @@
-using RocketMonitor.Domain.Interface;
-
 namespace RocketMonitor.Domain.Json;
 
 public class Metadata

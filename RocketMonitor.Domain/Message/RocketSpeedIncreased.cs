@@ -7,12 +7,12 @@ namespace RocketMonitor.Domain.Message;
 public class RocketSpeedIncreased : IRocketMessage
 {
     /// <summary>
-    /// Empty constructor for deserialization
+    ///     Empty constructor for deserialization
     /// </summary>
     public RocketSpeedIncreased()
     {
-        
     }
+
     public RocketSpeedIncreased(InputMessage message)
     {
         By = message.Message.By;
@@ -24,6 +24,8 @@ public class RocketSpeedIncreased : IRocketMessage
 
     public Rocket Fold(Rocket rocket)
     {
+        if (rocket.Channel == default || rocket.LaunchTime == default)
+            throw new InvalidOperationException("Rocket missing launch information");
         rocket.LaunchSpeed += By;
         return rocket;
     }

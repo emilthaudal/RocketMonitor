@@ -7,12 +7,12 @@ namespace RocketMonitor.Domain.Message;
 public class RocketExploded : IRocketMessage
 {
     /// <summary>
-    /// Empty constructor for deserialization
+    ///     Empty constructor for deserialization
     /// </summary>
     public RocketExploded()
     {
-        
     }
+
     public RocketExploded(InputMessage message)
     {
         Reason = message.Message.Reason ?? throw new ArgumentNullException(nameof(message));
@@ -24,6 +24,8 @@ public class RocketExploded : IRocketMessage
 
     public Rocket Fold(Rocket rocket)
     {
+        if (rocket.Channel == default || rocket.LaunchTime == default)
+            throw new InvalidOperationException("Rocket missing launch information");
         rocket.ExplodedReason = Reason;
         rocket.ExplodedTime = Metadata.MessageTime;
         return rocket;

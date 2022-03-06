@@ -11,8 +11,8 @@ namespace RocketMonitor.API.Controllers;
 public class MessagesController : ControllerBase
 {
     private readonly ICommandController _commandController;
-    private readonly ILogger<MessagesController> _logger;
     private readonly JsonSerializerOptions _jsonSerializerOptions;
+    private readonly ILogger<MessagesController> _logger;
 
     public MessagesController(ILogger<MessagesController> logger, ICommandController commandController)
     {

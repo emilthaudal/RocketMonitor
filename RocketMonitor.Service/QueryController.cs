@@ -1,5 +1,4 @@
 using System.Text.Json;
-using Microsoft.Extensions.Configuration;
 using RocketMonitor.Domain.Interface;
 using RocketMonitor.Domain.Message;
 using RocketMonitor.Domain.Model;
@@ -24,10 +23,7 @@ public class QueryController : IQueryController
         // We iterate through event ordered by EventNumber to account for messages received in wrong order when folding object.
         var events = _eventStore.ReadStream($"{_streamPrefix}{channel:N}").OrderBy(e => e.Metadata.EventNumber);
         // If we don't find a RocketLaunched message we don't return the Rocket.
-        if (!await events.AnyAsync(e => e.Metadata.EventType.Equals(nameof(RocketLaunched))))
-        {
-            return null;
-        }
+        if (!await events.AnyAsync(e => e.Metadata.EventType.Equals(nameof(RocketLaunched)))) return null;
         var rocket = new Rocket();
         // Aggregate events into current state Rocket model
         // Runs .Fold on each message in stream.
@@ -40,10 +36,7 @@ public class QueryController : IQueryController
     {
         var events = _eventStore.ReadStream($"{_streamPrefix}{channel:N}").OrderBy(e => e.Metadata.EventNumber);
         // If we don't find a RocketLaunched message we don't return the Rocket.
-        if (!await events.AnyAsync(e => e.Metadata.EventType.Equals(nameof(RocketLaunched))))
-        {
-            yield break;
-        }
+        if (!await events.AnyAsync(e => e.Metadata.EventType.Equals(nameof(RocketLaunched)))) yield break;
 
         await foreach (var e in events)
         {
@@ -99,10 +92,7 @@ public class QueryController : IQueryController
             if (!Guid.TryParse(stringId, out var channel)) continue;
 
             var rocket = await GetRocket(channel);
-            if (rocket == null)
-            {
-                continue;
-            }
+            if (rocket == null) continue;
             yield return rocket;
         }
     }

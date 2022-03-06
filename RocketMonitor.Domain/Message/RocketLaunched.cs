@@ -7,12 +7,12 @@ namespace RocketMonitor.Domain.Message;
 public class RocketLaunched : IRocketMessage
 {
     /// <summary>
-    /// Empty constructor for deserialization
+    ///     Empty constructor for deserialization
     /// </summary>
     public RocketLaunched()
     {
-        
     }
+
     public RocketLaunched(InputMessage message)
     {
         Type = message.Message.Type ?? throw new ArgumentNullException(nameof(message));

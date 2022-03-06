@@ -1,5 +1,4 @@
 using System.Text.Json;
-using Microsoft.Extensions.Configuration;
 using RocketMonitor.Domain.Interface;
 using RocketMonitor.Infrastructure.Interface;
 using RocketMonitor.Infrastructure.Model;
@@ -25,7 +24,7 @@ public class CommandController : ICommandController
         IEvent e = new Event();
         e.Content = JsonSerializer.Serialize<object>(rocketMessage);
         e.streamId = streamId;
-        e.Metadata = new Metadata
+        e.Metadata = new EventMetadata
         {
             EventNumber = rocketMessage.Metadata.MessageNumber, EventTime = DateTime.Now,
             EventType = rocketMessage.Metadata.MessageType

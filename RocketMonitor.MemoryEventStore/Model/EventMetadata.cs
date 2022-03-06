@@ -2,7 +2,7 @@ using RocketMonitor.Infrastructure.Model;
 
 namespace RocketMonitor.MemoryEventStore.Model;
 
-public class Metadata : IMetadata
+public class EventMetadata : IMetadata
 {
     public DateTime EventTime { get; set; }
     public string EventType { get; set; }

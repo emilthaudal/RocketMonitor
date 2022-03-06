@@ -22,5 +22,9 @@ public interface IEventStore
     /// <returns>An async enumerable of the events in stream</returns>
     public IAsyncEnumerable<IEvent> ReadStream(string stream, bool forwards = true);
 
+    /// <summary>
+    ///     Gets all streams existing in Store
+    /// </summary>
+    /// <returns>Async enumerable of all stream-ids currently in store</returns>
     public IAsyncEnumerable<string> GetAllStreams();
 }
