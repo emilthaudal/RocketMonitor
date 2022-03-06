@@ -10,7 +10,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketMonitor.Infrastructur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketMonitor.Service", "RocketMonitor.Service\RocketMonitor.Service.csproj", "{A1EE1E06-820C-4351-95D2-5AB8F1D17CC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketMonitor.Service.xUnit", "RocketMonitor.Service.xUnit\RocketMonitor.Service.xUnit.csproj", "{8EE678FE-3E3A-4D18-8E46-75BC86D8E066}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{80C5A5F9-8CBA-4082-8658-0FA90EACB9B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketMonitor.Service.xUnit", "Test\RocketMonitor.Service.xUnit\RocketMonitor.Service.xUnit.csproj", "{BE20F763-24AB-483A-A2BC-07B9E0DAA576}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketMonitor.Domain.xUnit", "Test\RocketMonitor.Domain.xUnit\RocketMonitor.Domain.xUnit.csproj", "{710A6D10-086F-4EEB-B11C-413AFB179283}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,9 +42,17 @@ Global
 		{A1EE1E06-820C-4351-95D2-5AB8F1D17CC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1EE1E06-820C-4351-95D2-5AB8F1D17CC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1EE1E06-820C-4351-95D2-5AB8F1D17CC7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8EE678FE-3E3A-4D18-8E46-75BC86D8E066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8EE678FE-3E3A-4D18-8E46-75BC86D8E066}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8EE678FE-3E3A-4D18-8E46-75BC86D8E066}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8EE678FE-3E3A-4D18-8E46-75BC86D8E066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE20F763-24AB-483A-A2BC-07B9E0DAA576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE20F763-24AB-483A-A2BC-07B9E0DAA576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE20F763-24AB-483A-A2BC-07B9E0DAA576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE20F763-24AB-483A-A2BC-07B9E0DAA576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{710A6D10-086F-4EEB-B11C-413AFB179283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{710A6D10-086F-4EEB-B11C-413AFB179283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{710A6D10-086F-4EEB-B11C-413AFB179283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{710A6D10-086F-4EEB-B11C-413AFB179283}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BE20F763-24AB-483A-A2BC-07B9E0DAA576} = {80C5A5F9-8CBA-4082-8658-0FA90EACB9B7}
+		{710A6D10-086F-4EEB-B11C-413AFB179283} = {80C5A5F9-8CBA-4082-8658-0FA90EACB9B7}
 	EndGlobalSection
 EndGlobal

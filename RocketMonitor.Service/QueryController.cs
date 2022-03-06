@@ -29,6 +29,8 @@ public class QueryController : IQueryController
             return null;
         }
         var rocket = new Rocket();
+        // Aggregate events into current state Rocket model
+        // Runs .Fold on each message in stream.
         rocket = await GetRocketMessages(channel).AggregateAsync(rocket, (current, m) => m.Fold(current));
 
         return rocket;
