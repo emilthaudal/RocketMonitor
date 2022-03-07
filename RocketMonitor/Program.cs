@@ -28,7 +28,7 @@ builder.Services.AddSwaggerGen(options =>
     if (File.Exists(xmlFilename)) options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
-const string urls = "http://localhost:8089;https://localhost:8088";
+const string urls = "http://localhost:8088";
 builder.WebHost.UseUrls(builder.Configuration.GetSection("urls").Get<string>() ?? urls);
 var app = builder.Build();
 // Configure the HTTP request pipeline.
