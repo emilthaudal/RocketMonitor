@@ -7,7 +7,7 @@ namespace RocketMonitor.MemoryEventStore;
 
 public class MemoryEventStore : IEventStore
 {
-    private readonly ConcurrentDictionary<string, List<IEvent>> _streams = new();
+    private readonly ConcurrentDictionary<string, ConcurrentBag<IEvent>> _streams = new();
 
     public async Task<int> AppendStream(string stream, IEvent appendEvent, StreamExists exists = StreamExists.Any)
     {
@@ -27,7 +27,7 @@ public class MemoryEventStore : IEventStore
             return events.Count;
         }
 
-        if (_streams.TryAdd(stream, new List<IEvent> {appendEvent})) return 1;
+        if (_streams.TryAdd(stream, new ConcurrentBag<IEvent> {appendEvent})) return 1;
 
         throw new InvalidOperationException("Failed to append stream with event");
     }

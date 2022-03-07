@@ -1,4 +1,6 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using RocketMonitor.Domain.Interface;
 using RocketMonitor.Domain.Model;
 using RocketMonitor.Service.Interface;
 
@@ -33,7 +35,7 @@ public class DashboardController : ControllerBase
     [HttpGet]
     public IAsyncEnumerable<object> GetRocketMessages([FromQuery] Guid channel)
     {
-        return _queryController.GetRocketMessages(channel);
+        return _queryController.GetRocketMessages(channel).Select(rocketMessage => rocketMessage as object);
     }
 
     /// <summary>
