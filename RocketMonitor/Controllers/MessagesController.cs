@@ -5,7 +5,7 @@ using RocketMonitor.Domain.Json;
 using RocketMonitor.Domain.Message;
 using RocketMonitor.Service.Interface;
 
-namespace RocketMonitor.API.Controllers;
+namespace RocketMonitor.Controllers;
 
 [ApiController]
 public class MessagesController : ControllerBase
@@ -27,30 +27,21 @@ public class MessagesController : ControllerBase
     {
         var message = await JsonSerializer.DeserializeAsync<InputMessage>(Request.Body, _jsonSerializerOptions);
         if (message == null) throw new ArgumentNullException(nameof(message));
-        _logger.LogInformation("Processing message {@Message}", message);
-        IRocketMessage specificMessage;
-        switch (message.Metadata.MessageType)
+        _logger.LogInformation("Processing message Channel {Channel}, MessageType: {MessageType}",
+            message.Metadata.Channel, message.Metadata.MessageType);
+        IRocketMessage specificMessage = message.Metadata.MessageType switch
         {
-            case nameof(RocketLaunched):
-                specificMessage = new RocketLaunched(message);
-                break;
-            case nameof(RocketSpeedIncreased):
-                specificMessage = new RocketSpeedIncreased(message);
-                break;
-            case nameof(RocketSpeedDecreased):
-                specificMessage = new RocketSpeedDecreased(message);
-                break;
-            case nameof(RocketMissionChanged):
-                specificMessage = new RocketMissionChanged(message);
-                break;
-            case nameof(RocketExploded):
-                specificMessage = new RocketExploded(message);
-                break;
-            default: throw new InvalidOperationException("Unsupported Message Type");
-        }
+            nameof(RocketLaunched) => new RocketLaunched(message),
+            nameof(RocketSpeedIncreased) => new RocketSpeedIncreased(message),
+            nameof(RocketSpeedDecreased) => new RocketSpeedDecreased(message),
+            nameof(RocketMissionChanged) => new RocketMissionChanged(message),
+            nameof(RocketExploded) => new RocketExploded(message),
+            _ => throw new InvalidOperationException("Unsupported Message Type")
+        };
 
         await _commandController.AppendMessageToStream(specificMessage);
-        _logger.LogInformation("Processed message OK {@Message}", message);
+        _logger.LogInformation("Processed message OK. Channel {Channel}, MessageType: {MessageType}",
+            specificMessage.Metadata.Channel, specificMessage.Metadata.MessageType);
         return Ok();
     }
 }

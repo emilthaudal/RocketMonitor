@@ -5,21 +5,21 @@ EXPOSE 5000
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["RocketMonitor.API/RocketMonitor.API.csproj", "RocketMonitor.API/"]
+COPY ["RocketMonitor/RocketMonitor.csproj", "RocketMonitor/"]
 COPY ["RocketMonitor.Domain/RocketMonitor.Domain.csproj", "RocketMonitor.Domain/"]
 COPY ["RocketMonitor.Service/RocketMonitor.Service.csproj", "RocketMonitor.Service/"]
 COPY ["RocketMonitor.Infrastructure/RocketMonitor.Infrastructure.csproj", "RocketMonitor.Infrastructure/"]
 COPY ["RocketMonitor.MemoryEventStore/RocketMonitor.MemoryEventStore.csproj", "RocketMonitor.MemoryEventStore/"]
-RUN dotnet restore "RocketMonitor.API/RocketMonitor.API.csproj"
+RUN dotnet restore "RocketMonitor/RocketMonitor.csproj"
 COPY . .
-WORKDIR "/src/RocketMonitor.API"
-RUN dotnet build "RocketMonitor.API.csproj" -c Release -o /app/build
+WORKDIR "/src/RocketMonitor"
+RUN dotnet build "RocketMonitor.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "RocketMonitor.API.csproj" -c Release -o /app/publish
+RUN dotnet publish "RocketMonitor.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-ENTRYPOINT ["dotnet", "RocketMonitor.API.dll"]
+ENTRYPOINT ["dotnet", "RocketMonitor.dll"]

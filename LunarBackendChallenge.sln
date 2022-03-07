@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketMonitor.API", "RocketMonitor.API\RocketMonitor.API.csproj", "{48E2D7C1-7453-4C7D-AFA6-A3AF0F01BC46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketMonitor", "RocketMonitor\RocketMonitor.csproj", "{48E2D7C1-7453-4C7D-AFA6-A3AF0F01BC46}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketMonitor.Domain", "RocketMonitor.Domain\RocketMonitor.Domain.csproj", "{D70A0580-A93C-4415-B1C6-07F80661D73F}"
 EndProject

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using RocketMonitor.Domain.Model;
 using RocketMonitor.Service.Interface;
 
-namespace RocketMonitor.API.Controllers;
+namespace RocketMonitor.Controllers;
 
 [ApiController]
 [Route("[controller]/[action]")]

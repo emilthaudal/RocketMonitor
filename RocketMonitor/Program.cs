@@ -25,17 +25,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    if (File.Exists(xmlFilename)) options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+const string urls = "http://localhost:8089;https://localhost:8088";
+builder.WebHost.UseUrls(builder.Configuration.GetSection("urls").Get<string>() ?? urls);
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
-app.UseHttpsRedirection();
 
 app.MapControllers();
 
