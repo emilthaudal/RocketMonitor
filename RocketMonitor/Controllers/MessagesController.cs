@@ -27,8 +27,10 @@ public class MessagesController : ControllerBase
     {
         var message = await JsonSerializer.DeserializeAsync<InputMessage>(Request.Body, _jsonSerializerOptions);
         if (message == null) throw new ArgumentNullException(nameof(message));
+
         _logger.LogInformation("Processing message Channel {Channel}, MessageType: {MessageType}",
             message.Metadata.Channel, message.Metadata.MessageType);
+
         IRocketMessage specificMessage = message.Metadata.MessageType switch
         {
             nameof(RocketLaunched) => new RocketLaunched(message),

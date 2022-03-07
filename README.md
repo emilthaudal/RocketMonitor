@@ -1,24 +1,31 @@
-# Solution to Lunar Backend Challenge
+# Rocket Monitor
 
 ## Get Started
 
 The project can be run in several ways:
-
 ### Prebuilt executables
 
 I've provided prebuilt self-contained executables for different frameworks in the github
 repository **[releases](https://github.com/emilthaudal/RocketMonitor/releases)**.
 
+The prebuild executables run on URLs: https://localhost:8088 and http://localhost:8089
+
+They have been tested on MacOS 12.2.1 and Windows 11.
+
 ### Docker
 
 The RocketMonitor folder contains a Dockerfile that can be run to run the API in a Linux Docker container.
 
-``` docker build -f RocketMonitor/Dockerfile . -t rocketmonitor```
+``` docker build -f RocketMonitor/Dockerfile . -t rocketmonitor ```
 
-```docker run -d -p 8088:5000 --name rocketm rocketmonitor```
+``` docker run -d -p 8088:5000 --name rocketm rocketmonitor ```
 
 **NOTE**: The API runs on http not https in Docker to avoid certificate setup for now. This is **not** production-ready
 behaviour.
+
+Populate with data with the following command:
+
+``` ./rockets launch "http://localhost:8088/messages" --message-delay=500ms --concurrency-level=1 ```
 
 ### .NET
 
@@ -26,9 +33,17 @@ To build and run the project using command:
 
 ```dotnet run --project ./RocketMonitor/RocketMonitor.csproj```
 
-To run the test suite run following command:
+Populate with data using the following command:
+
+```./rockets launch "https://localhost:8088/messages" --message-delay=500ms --concurrency-level=1```
+
+To run the automated test suites run following command:
 
 ```dotnet test```
+
+The automated test suites are also run on pushes to GitHub and results can be seen here:
+
+**[Test Results](https://github.com/emilthaudal/RocketMonitor/actions)**
 
 ## Solution architecture
 
@@ -39,15 +54,14 @@ The solution consists of seven projects:
 
 ### RocketMonitor
 
-This is the service that presents the API containing three endpoints:
+This is the service that presents the API containing four endpoints:
 
 * /messages - **POST** accepts messages from rockets
 * /Dashboard/GetRockets - **GET** retrieves current state of all rockets
 * /Dashboard/GetRocket - **GET** retrieves current state of a single rocket
 * /Dashboard/GetRocketMessages - **GET** retrieves all messages for a single rocket
 
-Documentation for each endpoint can be seen at /swagger when the API is running. The default URLs
-are https://localhost:8088 and http://localhost:8089
+Documentation for each endpoint can be seen at /swagger when the API is running. 
 
 ### RocketMonitor.Domain
 
