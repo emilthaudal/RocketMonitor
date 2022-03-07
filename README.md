@@ -14,9 +14,9 @@ The RocketMonitor.API folder contains a Dockerfile that can be run to run the AP
 
 ``` docker build -f RocketMonitor.API/Dockerfile . -t rocketmonitor```
 
-```docker run rocketmonitor -p 8088:80 -n rocketmonitor ```
+```docker run -d -p 8088:5000 --name rocketm rocketmonitor```
 
-**NOTE**: The API runs on port 80 in container and this port should be bound to a port on the local machine.
+**NOTE**: The API runs on http not https in Docker to avoid certificate setup for now. This is not production-ready behaviour.
 
 ### .NET
 
