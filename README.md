@@ -8,9 +8,14 @@ The project can be run in several ways:
 I've provided prebuilt self-contained executables for different frameworks in the github
 repository **[releases](https://github.com/emilthaudal/RocketMonitor/releases)**.
 
-The prebuild executables run on URLs: https://localhost:8088 and http://localhost:8089
+The prebuild executables run on URLs: http://localhost:8088 by default. 
+This can be changed by overriding the configuration using an [appsettings.json](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-6.0#override-configuration)
+file or setting ```ASPNETCORE_URLS``` environment value to a different url.
 
-They have been tested on MacOS 12.2.1 and Windows 11.
+**NOTE**: The API runs on http not https for now to avoid certificate setup for now. This is **NOT** production-ready
+behaviour.
+
+The executables have been tested on MacOS 12.2.1 and Windows 11.
 
 ### Docker
 
@@ -19,9 +24,6 @@ The RocketMonitor folder contains a Dockerfile that can be run to run the API in
 ``` docker build -f RocketMonitor/Dockerfile . -t rocketmonitor ```
 
 ``` docker run -d -p 8088:5000 --name rocketm rocketmonitor ```
-
-**NOTE**: The API runs on http not https in Docker to avoid certificate setup for now. This is **not** production-ready
-behaviour.
 
 Populate with data with the following command:
 
@@ -35,7 +37,7 @@ To build and run the project using command:
 
 Populate with data using the following command:
 
-```./rockets launch "https://localhost:8088/messages" --message-delay=500ms --concurrency-level=1```
+```./rockets launch "http://localhost:8088/messages" --message-delay=500ms --concurrency-level=1```
 
 To run the automated test suites run following command:
 
